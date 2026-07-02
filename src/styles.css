@@ -1,0 +1,16 @@
+body {
+  background: #f5f7fa;
+}
+
+.page-card {
+  border: 0;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.stock-bajo {
+  background-color: #fff3cd !important;
+}
+
+.stock-agotado {
+  background-color: #f8d7da !important;
+}

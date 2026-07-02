@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2>Productos</h2>
+  <a class="btn btn-primary" routerLink="/productos/nuevo">Nuevo producto</a>
+</div>
+
+<div class="card page-card p-3 mb-4">
+  <div class="table-responsive">
+    <table class="table align-middle">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Categoría</th>
+          <th>Precio</th>
+          <th>Stock</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let producto of productos" appResaltarStock [stock]="producto.stock" [stockMinimo]="producto.stockMinimo">
+          <td>{{ producto.nombre }}</td>
+          <td>{{ producto.categoria }}</td>
+          <td>S/ {{ producto.precio }}</td>
+          <td>{{ producto.stock }}</td>
+          <td><span class="badge text-bg-info">{{ producto.stock | estadoStock:producto.stockMinimo }}</span></td>
+          <td>
+            <button class="btn btn-sm btn-outline-primary me-1" (click)="irDetalle(producto.id)">Detalle</button>
+            <a class="btn btn-sm btn-outline-warning me-1" [routerLink]="['/productos/editar', producto.id]">Editar</a>
+            <button class="btn btn-sm btn-outline-danger" (click)="eliminar(producto.id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<h4 class="mb-3">Tarjetas reutilizables con Input y Output</h4>
+<div class="row g-3">
+  <div class="col-md-4" *ngFor="let producto of productos">
+    <app-tarjeta-producto [producto]="producto" (verDetalle)="irDetalle($event)"></app-tarjeta-producto>
+  </div>
+</div>

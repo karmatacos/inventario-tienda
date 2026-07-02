@@ -1,0 +1,67 @@
+<h2 class="mb-3">Movimientos de inventario</h2>
+<div class="row g-3">
+  <div class="col-md-5">
+    <div class="card page-card p-4">
+      <h5>Registrar entrada o salida</h5>
+      <form [formGroup]="movimientoForm" (ngSubmit)="registrar()" class="row g-3">
+        <div class="col-12">
+          <label class="form-label">Producto</label>
+          <select class="form-select" formControlName="productoId">
+            <option *ngFor="let producto of productos" [ngValue]="producto.id">
+              {{ producto.nombre }} - Stock: {{ producto.stock }}
+            </option>
+          </select>
+        </div>
+
+        <div class="col-12">
+          <label class="form-label">Tipo</label>
+          <select class="form-select" formControlName="tipo">
+            <option value="Entrada">Entrada</option>
+            <option value="Salida">Salida</option>
+          </select>
+        </div>
+
+        <div class="col-12">
+          <label class="form-label">Cantidad</label>
+          <input type="number" class="form-control" formControlName="cantidad">
+        </div>
+
+        <div class="col-12">
+          <label class="form-label">Observación</label>
+          <input class="form-control" formControlName="observacion">
+        </div>
+
+        <div class="col-12">
+          <button class="btn btn-primary" type="submit">Registrar</button>
+        </div>
+      </form>
+
+      <div class="alert alert-info mt-3" *ngIf="mensaje">{{ mensaje }}</div>
+    </div>
+  </div>
+
+  <div class="col-md-7">
+    <div class="card page-card p-4">
+      <h5>Historial</h5>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Tipo</th>
+            <th>Cantidad</th>
+            <th>Fecha</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let movimiento of movimientos">
+            <td>{{ movimiento.productoNombre }}</td>
+            <td>{{ movimiento.tipo }}</td>
+            <td>{{ movimiento.cantidad }}</td>
+            <td>{{ movimiento.fecha.toLocaleString() }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="text-muted" *ngIf="movimientos.length === 0">Todavía no se registran movimientos.</p>
+    </div>
+  </div>
+</div>

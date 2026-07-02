@@ -1,0 +1,37 @@
+<div class="card page-card p-4">
+  <h2 class="mb-3">{{ productoId ? 'Editar producto' : 'Registrar producto' }}</h2>
+  <form [formGroup]="productoForm" (ngSubmit)="guardar()" class="row g-3">
+    <div class="col-md-6">
+      <label class="form-label">Nombre</label>
+      <input class="form-control" formControlName="nombre">
+      <small class="text-danger" *ngIf="productoForm.controls.nombre.touched && productoForm.controls.nombre.invalid">Ingrese un nombre válido.</small>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Categoría</label>
+      <select class="form-select" formControlName="categoria">
+        <option *ngFor="let categoria of categorias" [value]="categoria">{{ categoria }}</option>
+      </select>
+    </div>
+
+    <div class="col-md-4">
+      <label class="form-label">Precio</label>
+      <input type="number" class="form-control" formControlName="precio">
+    </div>
+
+    <div class="col-md-4">
+      <label class="form-label">Stock</label>
+      <input type="number" class="form-control" formControlName="stock">
+    </div>
+
+    <div class="col-md-4">
+      <label class="form-label">Stock mínimo</label>
+      <input type="number" class="form-control" formControlName="stockMinimo">
+    </div>
+
+    <div class="col-12">
+      <button class="btn btn-success me-2" type="submit">Guardar</button>
+      <a class="btn btn-outline-secondary" routerLink="/productos">Cancelar</a>
+    </div>
+  </form>
+</div>
